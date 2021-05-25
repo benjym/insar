@@ -1,0 +1,3 @@
+machine urs.earthdata.nasa.gov
+    login EARTHDATA_LOGIN_GOES_HERE
+    password EARTHDATA_PASSWORD_GOES_HERE

@@ -1,0 +1,6 @@
+mintpy.load.processor        = hyp3
+##---------interferogram datasets:
+mintpy.load.unwFile          = $DATA_DIR/interferogram/*/*unw_phase_clip.tif
+mintpy.load.corFile          = $DATA_DIR/interferogram/*/*corr_clip.tif
+##---------geometry datasets:
+mintpy.load.demFile          = $DATA_DIR/DEM/dem_clip.tif
