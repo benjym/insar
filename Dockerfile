@@ -63,7 +63,7 @@ RUN ${PYTHON3DIR}/bin/conda config --add channels conda-forge && \
 
 # Install hyp3 dependencies
 RUN ${PYTHON3DIR}/bin/conda install gdal
-RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib
+RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib ipython
 
 # Install pykml
 RUN ${PYTHON3DIR}/bin/pip install git+https://github.com/yunjunz/pykml.git
@@ -77,8 +77,13 @@ RUN mkdir -p ${WORK_DIR}
 ENV WORK_DIR=${WORK_DIR}
 WORKDIR ${WORK_DIR}
 
+# Set some bash aliases so I don't freak out
+RUN echo 'alias ..="cd .."' >> ~/.bashrc
+RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
+
 # Copy custom app scripts to app folder - not required
-COPY ["./", "/home/app/"]
+# COPY ["./", "/home/work/"]
+COPY ["./netrc", "~/.netrc"]
 
 # Run entrypoint script - not required
-CMD ["python3", "/home/app/app.py"]
+# CMD ["python3", "/home/app/app.py"]
