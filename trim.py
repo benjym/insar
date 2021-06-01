@@ -9,4 +9,6 @@ for root, dir, filelist in os.walk('./'):
             fullpath = os.path.join(root, file) # Get the full path to the file
             files.append(fullpath)
 
-cutFiles([files])
+# print(f'Going to trim these files:{files}')
+
+cutFiles(files)
