@@ -18,8 +18,8 @@ dem_name=None
 
 # Change these to suit your needs - currently set to the greater sydney/wollongong area
 lat_max = -33.0874
-lat_min = -33.1062 #-34.9762
-lon_max = 149.7999 #151.7999
+lat_min = -34.9762
+lon_max = 151.7999
 lon_min = 149.6343
 
 # Location to store the DEM file
