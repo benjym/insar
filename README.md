@@ -15,14 +15,10 @@ This package is for people who are processing SBAS InSAR data with MintPy from A
 6. Run that docker image as a container. Under `Optional Settings`, put the path to the local version of this folder in `Host path` and `/home/work/` in the `Container path`. This will open a terminal running linux that has all the necessary packages installed and ready to go.
 
 ## Running a MintPy job
-1. Request and download processed InSAR products using `hyp3_sdk` or via the [ASF Vertex website](https://search.asf.alaska.edu/#/).
+1. Request and download processed InSAR products using `hyp3_sdk` or via the [ASF Vertex website](https://search.asf.alaska.edu/#/). Move the data you want to analyse into the `interferograms` folder. This folder should contain one folder per granule, with the foldername the same as the granule ID, i.e. once you have unzipped the file, just drag unzipped folder into the `interferograms` folder. You will need to create this folder if it doesn't exist.
 2. Next we want to download the Digital Elevation Map (DEM) that corresponds to the data we are interested in. We have two options, 1: Download a pre-defined area base on its latitude and longitude or 2: Download the part of the DEM that corresponds to a specific Scene from ASF. Pick either of the below methods, they are pretty much equivalent:
     1. Open up the file `download_DEM.py` and edit the `lat_max`, `lat_min`, `lon_max`, `lon_min` to fit your area. You can then download the corresponding DEM used in processing by running `python download_DEM.py`.
     2. Go to [ASF Vertex](https://search.asf.alaska.edu/#/), do a Geographic search for one of the Scenes you are studying, and download that Scene by first adding it to your Download Queue, then clicking Downloads at the top right, and then clicking the cloud with a down arrow button next to the file. Unzip this file. Run the following command in the docker prompt: `python /home/python/miniconda3/lib/python3.8/site-packages/hyp3lib/get_dem.py FILENAME /home/work/DEM/dem.tif` where `FILENAME` is the path to the `.SAFE` folder within the unzipped folder.
-3. Copy and paste the HyP3 interferogram metadata file (e.g. `S1BB_20170510T070618_20170522T070619_VVP012_INT80_G_ueF_FF85.txt`) into the same directory as your DEM and give it the same name as your DEM (e.g. `dem.txt`)
+3. Copy and paste the HyP3 interferogram metadata file (e.g. `S1BB_20170510T070618_20170522T070619_VVP012_INT80_G_ueF_FF85.txt`) into the same directory as your DEM and give it the same name as your DEM (e.g. `dem_clip.txt`)
 4. Clip DEM and all interferograms to the same area by running `python trim.py`. NOTE: This will trim **every** possible file in all subfolders to the same area, so make sure only files you want are in this folder and subfolders.
-5. Move the data you want to analyse into the `interferograms` folder. This should contain:
-    1. One folder per granule, with the foldername the same as the granule ID (i.e. once you have unzipped the file, just drag the folder here). In each of these folders should be the clipped phase tif, the clipped corr tiff and the metadata txt file.
-    2. One folder called `DEM`, with the DEM tif, the clipped DEM tif and a DEM metadata txt file.
-    3. One folder called `mintpy` with a mintpy metadata txt file. There is a sample file called `default.txt` to get you started.
-6. Run MintPy with the command `smallbaselineApp.py /home/work/mintpy/default.txt`
+5. Run MintPy with the command `smallbaselineApp.py mintpy/default.txt`
