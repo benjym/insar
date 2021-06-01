@@ -84,6 +84,7 @@ RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
 # Copy custom app scripts to app folder - not required
 # COPY ["./", "/home/work/"]
 COPY ["./netrc", "~/.netrc"]
+COPY ["./ecmwfapirc", "~/.ecmwfapirc"]
 
 # Run entrypoint script - not required
 # CMD ["python3", "/home/app/app.py"]

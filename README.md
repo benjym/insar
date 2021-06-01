@@ -10,9 +10,10 @@ This package is for people who are processing SBAS InSAR data with MintPy from A
 1. Clone this repository (or just download it as a zip file and unzip it if cloning sounds too hard).
 2. Copy the file `netrc.copy` and rename the new file `netrc`. Register at `urs.earthdata.nasa.gov` and put your login details (username and password) into the relevant locations in the file `netrc`.
 3. Copy the file `asf.copy` and rename the new file `asf.ini`. Register at `https://asf.alaska.edu/`. Copy your login details (username and password) and put them into the relevant locations in `asf.ini`.
-4. Install [docker](https://www.docker.com/) and have it running on your computer.
-5. In docker, pull the image we need with `docker pull benjym/insar:latest`. This will take a long time the first time you do it (10-15 mins?).
-6. Run that docker image as a container. Under `Optional Settings`, put the path to the local version of this folder in `Host path` and `/home/work/` in the `Container path`. This will open a terminal running linux that has all the necessary packages installed and ready to go.
+4. Copy the file `ecmwf` and rename the new file `ecmwfapirc`. Register at `https://apps.ecmwf.int/registration/`. Copy your login details (email address and [this key](https://api.ecmwf.int/v1/key/)) and put them into the relevant locations in `ecmwfapirc`. After you have registered, you need to [sign the agreement](https://apps.ecmwf.int/datasets/licences/general/). Full instructions [here](http://earthdef.caltech.edu/projects/pyaps/wiki/Main#).
+5. Install [docker](https://www.docker.com/) and have it running on your computer.
+6. In docker, pull the image we need with `docker pull benjym/insar:latest`. This will take a long time the first time you do it (10-15 mins?).
+7. Run that docker image as a container. Under `Optional Settings`, put the path to the local version of this folder in `Host path` and `/home/work/` in the `Container path`. This will open a terminal running linux that has all the necessary packages installed and ready to go.
 
 ## Running a MintPy job
 1. Request and download processed InSAR products using `hyp3_sdk` or via the [ASF Vertex website](https://search.asf.alaska.edu/#/). Move the data you want to analyse into the `interferograms` folder. This folder should contain one folder per granule, with the foldername the same as the granule ID, i.e. once you have unzipped the file, just drag unzipped folder into the `interferograms` folder. You will need to create this folder if it doesn't exist.
