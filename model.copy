@@ -1,0 +1,4 @@
+#####key for ECMWF in Climate Data Store Application Program Interface
+#Get it from https://retostauffer.org/code/Download-ERA5/
+[CDS]
+key = PUT_YOUR_UID_HERE:PUT_YOUR_KEY_HERE

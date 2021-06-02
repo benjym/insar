@@ -4,3 +4,5 @@ mintpy.load.unwFile          = /home/work/data/interferograms/*/*unw_phase_clip.
 mintpy.load.corFile          = /home/work/data/interferograms/*/*corr_clip.tif
 ##---------geometry datasets:
 mintpy.load.demFile          = /home/work/data/DEM/dem_clip.tif
+##---------testing:
+mintpy.troposphericDelay.method = no
