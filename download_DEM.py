@@ -23,7 +23,7 @@ lon_max = 151.7999
 lon_min = 149.6343
 
 # Location to store the DEM file
-outfile = './DEM/dem.tif'
+outfile = './data/DEM/dem.tif'
 
 if use_opentopo:
     demtype = None

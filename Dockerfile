@@ -83,8 +83,10 @@ RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
 
 # Copy custom app scripts to app folder - not required
 # COPY ["./", "/home/work/"]
-COPY ["./netrc", "~/.netrc"]
-COPY ["./ecmwfapirc", "~/.ecmwfapirc"]
+# COPY ["./asf.ini", "/root/asf.ini"] # for downloading directly from ASF via wget (I think?), currently not needed
+COPY ["./netrc", "/root/.netrc"] # needed for hyp3_sdk
+# COPY ["./ecmwfapirc", "/root/.ecmwfapirc"] # needed for mintpy
+COPY ["./model.cfg", "/home/python/PyAPS/pyaps3/model.cfg"] # needed for mintpy
 
 # Run entrypoint script - not required
 # CMD ["python3", "/home/app/app.py"]
