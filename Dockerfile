@@ -72,7 +72,7 @@ RUN ${PYTHON3DIR}/bin/pip install git+https://github.com/yunjunz/pykml.git
 #RUN mkdir -p /home/.config/dask && \
 #    cp ${MINTPY_HOME}/mintpy/defaults/dask_mintpy.yaml /home/.config/dask/dask_mintpy.yaml
 
-# Set working directory ENV - map a host data volume to this using "docker build . -t mintpy && docker run mintpy -v /host/path/to/data:/home/work/"
+# Set working directory ENV - map a host data volume to this using "docker build . -t benjym/insar:latest && docker run benjym/insar:latest -v /host/path/to/data:/home/work/"
 RUN mkdir -p ${WORK_DIR}
 ENV WORK_DIR=${WORK_DIR}
 WORKDIR ${WORK_DIR}
