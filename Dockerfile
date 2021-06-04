@@ -89,4 +89,4 @@ COPY ["./netrc", "/root/.netrc"] # needed for hyp3_sdk
 COPY ["./model.cfg", "/home/python/PyAPS/pyaps3/model.cfg"] # needed for mintpy
 
 # Run entrypoint script - not required
-# CMD ["python3", "/home/app/app.py"]
+CMD ["sh", "/home/work/app.sh"]
