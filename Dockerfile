@@ -81,12 +81,18 @@ WORKDIR ${WORK_DIR}
 RUN echo 'alias ..="cd .."' >> ~/.bashrc
 RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
 
-# Copy custom app scripts to app folder - not required
+# Not necessary scripts
 # COPY ["./", "/home/work/"]
 # COPY ["./asf.ini", "/root/asf.ini"] # for downloading directly from ASF via wget (I think?), currently not needed
-COPY ["./netrc", "/root/.netrc"] # needed for hyp3_sdk
 # COPY ["./ecmwfapirc", "/root/.ecmwfapirc"] # needed for mintpy
-COPY ["./model.cfg", "/home/python/PyAPS/pyaps3/model.cfg"] # needed for mintpy
+
+# Actually necessary scripts
+#COPY ["./netrc", "/root/.netrc"] # needed for hyp3_sdk
+#COPY ["./model.cfg", "/home/python/PyAPS/pyaps3/model.cfg"] # needed for mintpy
+
+# copy across credentials on run
+RUN echo 'cp /home/work/netrc     /root/.netrc' >> ~/.bashrc
+RUN echo 'cp /home/work/model.cfg /home/python/PyAPS/pyaps3/model.cfg' >> ~/.bashrc
 
 # Run entrypoint script - not required
 # CMD ["sh", "/home/work/app.sh"]
