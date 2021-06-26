@@ -22,8 +22,6 @@ This package is for people who are processing SBAS InSAR data with MintPy from A
 
    **Note:** You need to enable the sliders for "Include DEM" and "Include Inc. Angle Map" before submitting the job.
 
-   Once the data is processed, download it. Move the data you want to analyse into the `data/interferograms` folder. This folder should contain one folder per granule, with the foldername the same as the granule ID, i.e. once you have unzipped the file, just drag the unzipped folder into the `interferograms` folder.
-2. Copy and paste one of the HyP3 dem files (e.g. `S1BB_20170510T070618_20170522T070619_VVP012_INT80_G_ueF_FF85_dem.tif`) into the `data/DEM` folder and rename it `dem.tif`
-3. Copy and paste the HyP3 interferogram metadata file (e.g. `S1BB_20170510T070618_20170522T070619_VVP012_INT80_G_ueF_FF85.txt`) into the same directory as your DEM (`/home/work/data/DEM/`) and rename it `dem_clip.txt`
-4. Clip the DEM and all interferograms to the same area by running `python trim.py`. NOTE: This will trim **every** possible file in all subfolders within `./data/` to the same area, so make sure only files you want are in this folder and subfolders.
-5. Run MintPy with the command `smallbaselineApp.py data/mintpy/default.txt`
+   Once the data is processed, download it. Move the data you want to analyse into the `data/hyp3/` folder. This folder should contain one folder per granule, with the foldername the same as the granule ID, i.e. once you have unzipped the file, just drag the unzipped folder into the `interferograms` folder.
+2. Clip the DEM and all interferograms to the same area by running `python trim.py`. NOTE: This will trim **every** possible file in all subfolders within `./data/` to the same area, so make sure only files you want are in this folder and subfolders.
+3. Run MintPy with the command `smallbaselineApp.py data/mintpy/default.txt`
