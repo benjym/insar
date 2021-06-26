@@ -91,8 +91,8 @@ RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
 #COPY ["./model.cfg", "/home/python/PyAPS/pyaps3/model.cfg"] # needed for mintpy
 
 # copy across credentials on run
-RUN echo 'cp /home/work/netrc     /root/.netrc' >> ~/.bashrc
-RUN echo 'cp /home/work/model.cfg /home/python/PyAPS/pyaps3/model.cfg' >> ~/.bashrc
+RUN echo 'cp /home/work/logins/netrc     /root/.netrc' >> ~/.bashrc
+RUN echo 'cp /home/work/logins/model.cfg /home/python/PyAPS/pyaps3/model.cfg' >> ~/.bashrc
 
 # Run entrypoint script - not required
 # CMD ["sh", "/home/work/app.sh"]
