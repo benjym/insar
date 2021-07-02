@@ -2,6 +2,8 @@
 # FROM debian:stretch
 FROM ubuntu:21.04
 
+EXPOSE 8888
+
 # Label image
 LABEL \
     "Description"="Container for open source time series InSAR processing with Mintpy" \
