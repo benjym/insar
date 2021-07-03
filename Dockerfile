@@ -6,11 +6,10 @@ EXPOSE 8888
 
 # Label image
 LABEL \
-    "Description"="Container for open source time series InSAR processing with Mintpy" \
-    "Github Source"="https://github.com/insarlab/MintPy/" \
-    "Installation"="https://github.com/insarlab/MintPy/blob/master/docs/installation.md" \
-    "Dockerfile Author"="Andre Theron" \
-    "Email"="andretheronsa@gmail.com"
+    "Description"="Connecting Hyp3 and MintPy. Amalgamation of the two existing dockerfiles" \
+    "Github Source"="https://github.com/benjym/insar/" \
+    "Dockerfile Author"="Benjy Marks" \
+    "Email"="benjy.marks@sydney.edu.au"
 
 # Install useful programs
 RUN apt-get update && \
@@ -47,8 +46,9 @@ ENV PROJ_LIB=${PYTHON3DIR}/share/proj
 # Set workdir
 WORKDIR /home/python
 
-# Pull and config mintpy
+# Pull and config mintpy and related tutorials
 RUN git clone https://github.com/insarlab/MintPy.git
+RUN git clone https://github.com/insarlab/MintPy-tutorial.git
 
 # Pull and config PyAPS
 RUN git clone https://github.com/yunjunz/pyaps3.git PyAPS
@@ -65,7 +65,7 @@ RUN ${PYTHON3DIR}/bin/conda config --add channels conda-forge && \
 
 # Install hyp3 dependencies
 RUN ${PYTHON3DIR}/bin/conda install gdal
-RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib ipython
+RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib ipython jupyterlab
 
 # Install pykml
 RUN ${PYTHON3DIR}/bin/pip install git+https://github.com/yunjunz/pykml.git
