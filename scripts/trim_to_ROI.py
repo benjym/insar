@@ -25,7 +25,8 @@ for root, dir, filelist in os.walk('/home/work/data/hyp3/'):
             fullpath = os.path.join(root, file) # Get the full path to the file
             files.append(fullpath)
 
-print(f'Going to trim these files:{files}')
+# print(f'Going to trim these files:{files}')
+print(f'Going to trim {len(files)} files')
 
 if len(files) == 1:
     sys.exit("Nothing to do!!!  Exiting...")
@@ -69,16 +70,23 @@ if ptr != -1:
             files[x+1] = name
 
 # Find the overlap between all scenes
-not_valid = []
+valid = []
 for x in range (len(files)-1):
     overlap = getOverlap(coords,files[x+1])
     # print(overlap)
     diff1 = (overlap[2] - overlap[0]) / pixSize
     diff2 = (overlap[3] - overlap[1]) / pixSize * -1.0
-    print("Found overlap size of {}x{}".format(int(diff1), int(diff2)))
-    if diff1 < 1 or diff2 < 1:
+    if x == 0:
+        diff1_truth = diff1
+        diff2_truth = diff2
+        print("Found overlap size of {}x{}".format(int(diff1), int(diff2)))
+
+    if diff1 == diff1_truth and diff2 == diff2_truth:
+        valid.append(x)
+    elif diff1 < 1 or diff2 < 1:
         print(f"WARNING: There was no overlap between scene and RoI in file {files[x]}")
-        not_valid.append(x)
+    else:
+        print(f"WARNING: There was partial overlap between scene and RoI in file {files[x]}")
 
 # Check to make sure there was some overlap
 # print("Clipping coordinates: {}".format(coords))
@@ -89,10 +97,12 @@ lst[3] = lst[1]
 lst[1] = tmp
 coords = tuple(lst)
 print("Pixsize : x = {} y = {}".format(pixSize,-1*pixSize))
+print('Clipping files... ')
 for x in range (len(files)):
-    if x not in not_valid:
+    if x in valid:
         file1 = files[x]
         file1_new = file1.replace('.tif','_clip.tif')
-        print("    clipping file {} to create file {}".format(file1, file1_new))
+        # print("    clipping file {} to create file {}".format(file1, file1_new))
         #        dst_d1 = gdal.Translate(file1_new,file1,projWin=coords,xRes=pixSize,yRes=pixSize,creationOptions = ['COMPRESS=LZW'])
         gdal.Warp(file1_new,file1,outputBounds=coords,xRes=pixSize,yRes=-1*pixSize,creationOptions = ['COMPRESS=LZW'])
+print('Done!')
