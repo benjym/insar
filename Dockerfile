@@ -21,6 +21,7 @@ RUN apt-get update && \
     vim \
     zip \
     libgdal-dev \
+    nano \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -60,12 +61,15 @@ RUN wget https://repo.continuum.io/miniconda/${MINICONDA_VERSION} && \
     rm ./${MINICONDA_VERSION}
 
 # Install dependencies
-RUN ${PYTHON3DIR}/bin/conda config --add channels conda-forge && \
-    ${PYTHON3DIR}/bin/conda install --yes --file ${MINTPY_HOME}/docs/conda.txt
+RUN ${PYTHON3DIR}/bin/conda install mamba -n base -c conda-forge
+RUN ${PYTHON3DIR}/bin/mamba install --yes --file ${MINTPY_HOME}/docs/requirements.txt -c conda-forge
+# RUN ${PYTHON3DIR}/bin/conda config --add channels conda-forge && \
+    # ${PYTHON3DIR}/bin/conda install --yes --file ${MINTPY_HOME}/docs/requirements.txt
 
 # Install hyp3 dependencies
-RUN ${PYTHON3DIR}/bin/conda install gdal
-RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib ipython jupyterlab
+# RUN ${PYTHON3DIR}/bin/conda install gdal
+RUN ${PYTHON3DIR}/bin/mamba install gdal -c conda-forge
+RUN ${PYTHON3DIR}/bin/python -m pip install hyp3_sdk hyp3lib ipython jupyterlab geodepy
 
 # Install pykml
 RUN ${PYTHON3DIR}/bin/pip install git+https://github.com/yunjunz/pykml.git
@@ -95,6 +99,10 @@ RUN echo 'alias ll="ls -lha"' >> ~/.bashrc
 # copy across credentials on run
 RUN echo 'cp /home/work/logins/netrc     /root/.netrc' >> ~/.bashrc
 RUN echo 'cp /home/work/logins/model.cfg /home/python/PyAPS/pyaps3/model.cfg' >> ~/.bashrc
+# these ones are non-essential
+RUN echo 'cp /home/work/asf.ini          /root/asf.ini' >> ~/.bashrc
+RUN echo 'cp /home/work/ecmwfapirc       /root/.ecmwfapirc' >> ~/.bashrc
+
 
 # Run entrypoint script - not required
 # CMD ["sh", "/home/work/app.sh"]
