@@ -5,6 +5,7 @@ import os
 import argparse
 from osgeo import gdal
 from hyp3lib.cutGeotiffs import getPixSize, getCorners, getOverlap
+from tqdm import tqdm
 
 # use values in metres (easting/northing)
 centre_easting = 242680.0
@@ -71,8 +72,8 @@ if ptr != -1:
 
 # Find the overlap between all scenes
 valid = []
-for x in range (len(files)-1):
-    overlap = getOverlap(coords,files[x+1])
+for x in tqdm(range(len(files))):
+    overlap = getOverlap(coords,files[x])
     # print(overlap)
     diff1 = (overlap[2] - overlap[0]) / pixSize
     diff2 = (overlap[3] - overlap[1]) / pixSize * -1.0
@@ -98,11 +99,10 @@ lst[1] = tmp
 coords = tuple(lst)
 print("Pixsize : x = {} y = {}".format(pixSize,-1*pixSize))
 print('Clipping files... ')
-for x in range (len(files)):
+for x in tqdm(range (len(files))):
     if x in valid:
         file1 = files[x]
         file1_new = file1.replace('.tif','_clip.tif')
         # print("    clipping file {} to create file {}".format(file1, file1_new))
-        #        dst_d1 = gdal.Translate(file1_new,file1,projWin=coords,xRes=pixSize,yRes=pixSize,creationOptions = ['COMPRESS=LZW'])
         gdal.Warp(file1_new,file1,outputBounds=coords,xRes=pixSize,yRes=-1*pixSize,creationOptions = ['COMPRESS=LZW'])
 print('Done!')
