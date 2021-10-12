@@ -2,8 +2,9 @@ mintpy.load.processor        = hyp3
 ##---------interferogram datasets:
 mintpy.load.unwFile          = /home/work/data/hyp3/*/*unw_phase_clip.tif
 mintpy.load.corFile          = /home/work/data/hyp3/*/*corr_clip.tif
-mintpy.load.incAngleFile     = /home/work/data/hyp3/*/*inc_map_clip.tif
 ##---------geometry datasets:
 mintpy.load.demFile          = /home/work/data/hyp3/*/*dem_clip.tif
-##---------testing:
+mintpy.load.incAngleFile     = /home/work/data/hyp3/*/*lv_theta_clip.tif
+mintpy.load.waterMaskFile    = /home/work/data/hyp3/*/*water_mask_clip.tif
+##---------extra stuff:
 #mintpy.troposphericDelay.method = auto
