@@ -62,7 +62,7 @@ RUN wget https://repo.continuum.io/miniconda/${MINICONDA_VERSION} && \
 
 # Install dependencies
 RUN ${PYTHON3DIR}/bin/conda install mamba -n base -c conda-forge
-RUN ${PYTHON3DIR}/bin/mamba install --yes --file ${MINTPY_HOME}/docs/requirements.txt -c conda-forge
+RUN ${PYTHON3DIR}/bin/mamba install --yes --file ${MINTPY_HOME}/requirements.txt -c conda-forge
 # RUN ${PYTHON3DIR}/bin/conda config --add channels conda-forge && \
     # ${PYTHON3DIR}/bin/conda install --yes --file ${MINTPY_HOME}/docs/requirements.txt
 
