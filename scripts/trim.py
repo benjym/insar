@@ -7,7 +7,7 @@ filetypes = ['unw_phase','corr','dem','lv_theta','water_mask']
 for root, dir, filelist in os.walk('/home/work/data/hyp3/'):
     for file in filelist:
         for f in filetypes:
-            if f + '.tif' in file:
+            if file.endswith(f + '.tif'):
                 fullpath = os.path.join(root, file) # Get the full path to the file
                 files.append(fullpath)
 
